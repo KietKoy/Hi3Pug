@@ -2,6 +2,7 @@ package model.DAO;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 import model.BEAN.*;
 public class User_DAO {
 	static String NAME_DB = "com.mysql.jdbc.Driver";
-	static String URL = "jdbc:mysql://localhost/ltmang";
+	static String URL = "jdbc:mysql://localhost/ltm";
 	public ResultSet querry(String sql)
 	{
 		ResultSet rs = null;
@@ -108,8 +109,9 @@ public class User_DAO {
 		String sql = "INSERT INTO `user`(`ID_User`, `Name`, `DateOfBirth`, `Email`, `Phone`, `IMG`) VALUES ('"+MaUser+"','"+HoTen+"','"+NgaySinh+"','"+Email+"','"+SDT+"','"+img+"')";
 		ResultSet rs = querry(sql);
 	}
-	public void updateUser(String MaUser, String HoTen, Date NgaySinh, String Email, String SDT, String img) {
-		String sql = "UPDATE `user` SET `Name`='"+HoTen+"',`DateOfBirth`='"+NgaySinh+"',`Email`='"+Email+"',`Phone`='"+SDT+"',`IMG`='"+img+"' WHERE ID_User = " + MaUser;
-		ResultSet rs = querry(sql);
-	}
+//	public void updateUser(String MaUser, String HoTen, Date NgaySinh, String Email, String SDT, String img) {
+//		String sql = "UPDATE `user` SET `Name`='"+HoTen+"',`DateOfBirth`='"+NgaySinh+"',`Email`='"+Email+"',`Phone`='"+SDT+"',`IMG`='"+img+"' WHERE ID_User = " + MaUser;
+//		ResultSet rs = querry(sql);
+//	}
+
 }

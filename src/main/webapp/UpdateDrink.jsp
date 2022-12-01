@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,10 +29,10 @@
                 
                     <ul class="header-user-menu">
                         <li class="header-user-item">
-                            <a href="">Tài khoản của tôi</a>
+                            <a href="">TÃ i khoáº£n cá»§a tÃ´i</a>
                         </li>
                         <li class="header-user-item header-user-item--separate">
-                            <a href="">Đăng xuất</a>
+                            <a href="">ÄÄng xuáº¥t</a>
                         </li>
                     </ul>
                 </li>

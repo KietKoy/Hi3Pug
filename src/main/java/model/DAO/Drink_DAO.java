@@ -1,6 +1,8 @@
 package model.DAO;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,7 +12,7 @@ import java.util.List;
 import model.BEAN.*;
 public class Drink_DAO {
 	static String NAME_DB = "com.mysql.jdbc.Driver";
-	static String URL = "jdbc:mysql://localhost/ltmang";
+	static String URL = "jdbc:mysql://localhost/ltm";
 	public ResultSet querry(String sql)
 	{
 		ResultSet rs = null;
@@ -119,7 +121,28 @@ public class Drink_DAO {
 		String sql = "INSERT INTO `drink`(`ID_Drink`, `Name_Drink`, `Ingredient`, `Price`, `IMG`) VALUES ('"+MaDoUong+"','"+TenDoUong+"','"+NguyenLieu+"','"+Gia+"','"+img+"')";
 		ResultSet rs = querry(sql);
 	}
+//	public void updateDoUong(String MaDoUong, String TenDoUong, String NguyenLieu, double Gia, String img) {
+//		String sql = "UPDATE `drink` SET Name_Drink`='"+TenDoUong+"',`Ingredient`='"+NguyenLieu+"',`Price`='"+Gia+"',`IMG`='"+img+"' WHERE ID_Drink = " + MaDoUong;
+//	}
+	
 	public void updateDoUong(String MaDoUong, String TenDoUong, String NguyenLieu, double Gia, String img) {
-		String sql = "UPDATE `drink` SET Name_Drink`='"+TenDoUong+"',`Ingredient`='"+NguyenLieu+"',`Price`='"+Gia+"',`IMG`='"+img+"' WHERE ID_Drink = " + MaDoUong;
+		try {
+			Class.forName(NAME_DB);  
+			Connection con=DriverManager.getConnection(URL,"root","");  
+			PreparedStatement pstmt = null;
+			pstmt = con.prepareStatement("UPDATE DRINK SET Name_Drink =?, Ingredient =?, Price =?, IMG =?  WHERE ID_Drink =? ");
+			pstmt.setString(1,TenDoUong);
+			pstmt.setString(2,NguyenLieu);
+			pstmt.setDouble(3,Gia);
+			pstmt.setString(4,img);
+			pstmt.setString(5,MaDoUong);
+			pstmt.executeUpdate();
+			pstmt.close();
+			con.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+		}
 	}
 }

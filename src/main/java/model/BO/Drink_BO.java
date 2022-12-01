@@ -15,4 +15,8 @@ public class Drink_BO {
 	public List<Drink> getDrinkbyNameandType(String nameSearch, String typeSearch) {
 		return new Drink_DAO().getDrinkbyNameandType(nameSearch, typeSearch);
 	}
+	public void updateDoUong(String MaDoUong, String TenDoUong, String NguyenLieu, double Gia, String img) {
+		new Drink_DAO().updateDoUong(MaDoUong, TenDoUong, NguyenLieu, Gia, img);
+	}
 }
+
