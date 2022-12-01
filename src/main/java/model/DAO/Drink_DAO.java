@@ -11,7 +11,7 @@ import model.BEAN.*;
 public class Drink_DAO {
 	static String NAME_DB = "com.mysql.jdbc.Driver";
 	static String URL = "jdbc:mysql://localhost/ltmang";
-	public ResultSet querry(String sql)
+	public ResultSet excute_querry(String sql)
 	{
 		ResultSet rs = null;
 		try 
@@ -28,9 +28,25 @@ public class Drink_DAO {
 			System.out.println("err "+e);
 		} ; 
 		return rs;
+	}
+	public void excute_update(String sql)
+	{
+		try 
+		{
+			Class.forName(NAME_DB) ; 
+			String url= URL; 
+			Connection con=DriverManager.getConnection(url,"root","") ; 
+			Statement stmt=con.createStatement() ;
+			String sql1= sql; 
+			stmt.executeUpdate(sql1) ; 
+			
+		} catch (Exception e)
+		{
+			System.out.println("err "+e);
+		} ; 
 		
 	}
-	public boolean checkDoUong(String MaDoUong) throws SQLException {
+	public boolean checkDoUong(String MaDoUong) {
 		List<Drink> res = getAllDoUong();
 		for(Drink a : res)
 		{
@@ -38,13 +54,21 @@ public class Drink_DAO {
 		}
 		return true;
 	}
+	public boolean isValid(String MaDoUong) {
+		List<Drink> res = getAllDoUong();
+		for(Drink a : res)
+		{
+			if(a.getID_Drink().equals(MaDoUong)) return true;
+		}
+		return false;
+	}
 	public List<Drink> getAllDoUong()
 	{
 		List<Drink> res = new ArrayList<Drink>();
 		//CoSoDuLieu
 		try {
 			String sql = "select * from drink";
-			ResultSet temp = querry(sql);
+			ResultSet temp = excute_querry(sql);
 			while(temp.next())
 			{
 				String id_drink = temp.getString(1);
@@ -61,7 +85,7 @@ public class Drink_DAO {
 		}
 		return res;
 	}
-	public Drink getDoUong (String MaDoUong) throws SQLException {
+	public Drink getDoUong (String MaDoUong) {
 		List<Drink> temp  = getAllDoUong();
 		for(Drink a : temp)
 		{
@@ -73,8 +97,8 @@ public class Drink_DAO {
 		List<Drink> res = new ArrayList<Drink>();
 		//CoSoDuLieu
 		try {
-			String sql = "select * from drink where Type = "+ typeDrinkSearch +" and Name_Drink LIKE '%" + nameSearch + "%'";
-			ResultSet temp = querry(sql);
+			String sql = "SELECT * FROM drink WHERE Type = '"+ typeDrinkSearch +"' AND Name_Drink LIKE '%" + nameSearch + "%'";
+			ResultSet temp = excute_querry(sql);
 			while(temp.next())
 			{
 				String id_drink = temp.getString(1);
@@ -98,7 +122,7 @@ public class Drink_DAO {
 		//CoSoDuLieu
 		try {
 			String sql = "select DISTINCT Type from drink";
-			ResultSet temp = querry(sql);
+			ResultSet temp = excute_querry(sql);
 			while(temp.next())
 			{
 				String type = temp.getString(1);
@@ -112,14 +136,17 @@ public class Drink_DAO {
 	public void delDoUong(String MaDoUong) 
 	{
 		String sql = "delete from drink where MaTK = " + MaDoUong;
-		ResultSet rs = querry(sql);
+		excute_update(sql);
 	}
-	public void addDoUong(String MaDoUong, String TenDoUong, String NguyenLieu, double Gia, String img) 
+	public void addDoUong(String MaDoUong, String TenDoUong,String type, String NguyenLieu, double Gia, String img) 
 	{
-		String sql = "INSERT INTO `drink`(`ID_Drink`, `Name_Drink`, `Ingredient`, `Price`, `IMG`) VALUES ('"+MaDoUong+"','"+TenDoUong+"','"+NguyenLieu+"','"+Gia+"','"+img+"')";
-		ResultSet rs = querry(sql);
+		String sql = "INSERT INTO `drink`(`ID_Drink`, `Name_Drink`, `Type`,`Ingredient`, `Price`, `IMG`) VALUES ('"+MaDoUong+"','"+TenDoUong+"','"+type+"','"+NguyenLieu+"','"+Gia+"','"+img+"')";
+		excute_update(sql);
 	}
-	public void updateDoUong(String MaDoUong, String TenDoUong, String NguyenLieu, double Gia, String img) {
-		String sql = "UPDATE `drink` SET Name_Drink`='"+TenDoUong+"',`Ingredient`='"+NguyenLieu+"',`Price`='"+Gia+"',`IMG`='"+img+"' WHERE ID_Drink = " + MaDoUong;
+	public void updateDoUong(String MaDoUong, String TenDoUong,String Type, String NguyenLieu, double Gia, String img) {
+		String sql = "UPDATE `drink` SET `Name_Drink`='"+TenDoUong+"',`Type`='"+Type+"',"
+				+ "`Ingredient`='"+NguyenLieu+"',`Price`='"+Gia+"',`IMG`='"+img+"' WHERE ID_Drink = '" + MaDoUong + "'";
+		excute_update(sql);
+		System.out.println("update_DAO");
 	}
 }

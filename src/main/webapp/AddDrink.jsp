@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page language="java" import="model.BEAN.*" %>
+    <%@ page language="java" import="java.util.List" %>
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -16,6 +17,7 @@
     <body>
     	<% User user = (User)session.getAttribute("user");
     		String role = (String)session.getAttribute("role");
+    		List<String> listTypeDrink = (List<String>) session.getAttribute("listTypeDrink"); 
     	%>
         <div id="main">
             <div id="header">
@@ -44,42 +46,38 @@
             </div>
 
             <div class="content">
-                <form action="" class="info">
+                <form action="DrinkControllerServlet" class="info">
                     <div class="upload">
                         <div class="upload-file">
                             <img id="output"/>
                         </div>
-                        <input type="file" accept="image/*" onchange="loadFile(event)">
+                        <input type="file" accept="image/*" onchange="loadFile(event)" name="img">
                     </div>
 
                     <div >
                         <table>
+                        	<tr>
+                                <td><label for="">ID:</label></td>
+                                <td><input type="text" name="id" id="" class="info-input"></td>
+                            </tr>
                             <tr>
                                 <td><label for="">Name:</label></td>
                                 <td><input type="text" name="name" id="" class="info-input"></td>
                             </tr>
                             <tr>
                                 <td><label for="">Ingredient:</label></td>
-                                <td>
-                                    <input type="checkbox" name="typeDrink" id="">
-                                    <label for="">Cafe</label>
-                                    <input type="checkbox" name="typeDrink" id="">
-                                    <label for="">Fruit</label>
-                                    <input type="checkbox" name="typeDrink" id="">
-                                    <label for="">Boba</label><br><br>
-
-                                </td>
+                                <td><input type="text" name="ingredient" id="" class="info-input"></td>
                             </tr>
                             <tr>
-                                <td></td>
+                                <td><label for="">Type:</label></td>
                                 <td>
-                                    <input type="checkbox" name="typeDrink" id="">
-                                    <label for="">Milk</label>
-                                    <input type="checkbox" name="typeDrink" id="">
-                                    <label for="">Tea</label>
-                                    <input type="checkbox" name="typeDrink" id="">
-                                    <label for="">Yogurt</label><br><br>
-                                </td>
+                                	<select name="typedrink" class="select_drink" style="background-color: #FFEFCD; color: #514236">
+		                            <% for(int i = 0; i < listTypeDrink.size(); i++ ) {
+		                            %>
+		                                <option value="<%=listTypeDrink.get(i)%>"><%=  listTypeDrink.get(i)%></option>
+		                             <%} %>
+                            		</select>
+                            	</td>
                             </tr>
                             <tr>
                                 <td><label for="">Price:</label></td>
@@ -89,12 +87,12 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input type="submit" value="ADD" class="btn content-btn  m-20">
+                                    <input type="submit" value="ADD" class="btn content-btn  m-20" name="add">
                                 </td>
                             </tr>
-                        </table>
-                        
-                        
+                        </table>  
+                        <input type="text" value="<%= user.getID_User() %>" name="iduser" style="width: 0; height: 0; visibility: hidden;">
+                         <input type="text" value="<%= role %>" name="role" style="width: 0; height: 0; visibility: hidden;">
                     </div>
                 </form>
             </div>
@@ -104,7 +102,7 @@
             var loadFile = function(event) {
                 var output = document.getElementById('output');
                 output.src = URL.createObjectURL(event.target.files[0]);
-                output.value = out.src;
+                output.value = event.target.files[0].name;
                 output.onload = function() {
                 	URL.revokeObjectURL(output.src) // free memory
                 }

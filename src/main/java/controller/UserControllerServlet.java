@@ -28,9 +28,10 @@ public class UserControllerServlet extends HttpServlet{
 			List<User> listUser = new ArrayList<User>();
 			listUser = user_BO.getAllUser();
 			HttpSession session = request.getSession();
+			session.invalidate();
 			session.setAttribute("user", user);
 			session.setAttribute("role", role);
-			session.setAttribute("listuser", listUser);
+			request.setAttribute("listuser", listUser);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminNV.jsp");
 			rd.forward(request, response);
 		}

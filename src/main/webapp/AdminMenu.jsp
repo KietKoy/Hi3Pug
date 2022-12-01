@@ -60,15 +60,17 @@
                 
                 <div class="content-search m-t-60">
                     <a href="DrinkControllerServlet?mod1=1&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn">ADD</a>
-                    <form action="">
+                    <form action="DrinkControllerServlet">
                         <div class="drink content-menu">
-                            <select name="" class="select_drink">
+                            <select name="typedrink" class="select_drink">
                             <% for(int i = 0; i < listTypeDrink.size(); i++ ) {
                             %>
-                                <option value="<%=i%>"><%=  listTypeDrink.get(i)%></option>
+                                <option value="<%=listTypeDrink.get(i)%>"><%=  listTypeDrink.get(i)%></option>
                              <%} %>
                             </select>
-                            <input class="content-input" type="text" name="search" id="" placeholder="Enter drink?">
+                            <input type="text" value="<%= user.getID_User() %>" name="iduser" style="width: 0; height: 0; visibility: hidden;">
+                            <input type="text" value="<%= role %>" name="role" style="width: 0; height: 0; visibility: hidden;">
+                            <input class="content-input" type="text" name="txt_search" id="" placeholder="Enter drink?">
                             <input type="submit" value="SEARCH" name="search" class="btn content-btn">
                         </div>
                     </form>
@@ -76,7 +78,7 @@
 
 
                 <div class="container">
-                <% for(int i = 0; i < Math.ceil(list_Drink.size()/4); i++){ %>
+                <% for(int i = 0; i < Math.ceil((double)list_Drink.size()/4); i++){ %>
                 	<div class="row m-t-60">
                 <% for(int j = i*4; j < (i+1)*4; j++) {
                 	if(j >= list_Drink.size()) break;

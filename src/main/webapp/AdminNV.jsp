@@ -21,7 +21,7 @@
 <body>
 	<%  User user = (User)session.getAttribute("user");
 		String role = (String) session.getAttribute("role");
-		List<User> listUser= (List<User>) session.getAttribute("listuser");
+		List<User> listUser= (List<User>) request.getAttribute("listuser");
 	%>
     <div id="main">
         <div id="header">
