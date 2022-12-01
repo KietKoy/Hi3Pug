@@ -89,7 +89,7 @@
                                 <h4 class="home-product-item__name"><%= list_Drink.get(j).getName_Drink() %></h4>
                                 <div class="home-product-item-btn">
                                     <a href="DrinkControllerServlet?update=<%= list_Drink.get(j).getID_Drink()%>&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn btn-small">UPDATE</a>
-                                    <a href="" class="btn content-btn btn-small">DELETE</a>
+                                    <a href="DrinkControllerServlet?delete=<%= list_Drink.get(j).getID_Drink()%>&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn btn-small">DELETE</a>
                                 </div>
                             </a>
                         </div>

@@ -96,6 +96,20 @@ public class DrinkControllerServlet extends HttpServlet{
 				rd.forward(request, response);
 			}
 		}
+		if(request.getParameter("delete")!=null) {
+			String iduser = request.getParameter("iduser");
+			String role = request.getParameter("Role");
+			User user = user_BO.getUser(iduser);
+			drink_BO.delDrink(request.getParameter("delete"));
+			List<Drink> list_drink = new ArrayList<Drink>();
+			list_drink = drink_BO.getAllDrink();
+			session = request.getSession();
+			session.setAttribute("user", user);
+			session.setAttribute("role", role);
+			session.setAttribute("list_drink", list_drink);
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminMenu.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**
