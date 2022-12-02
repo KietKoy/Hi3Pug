@@ -161,6 +161,10 @@ public class UserControllerServlet extends HttpServlet{
 			String password = request.getParameter("password");
 			String checkAdmin = request.getParameter("isAdmin");
 			int isAdmin = Integer.parseInt(checkAdmin);
+			if(img == "") {
+				User user = (User) session.getAttribute("user");
+				img = user.getIMG();
+			}
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 			java.util.Date date1 = null;
 			try {

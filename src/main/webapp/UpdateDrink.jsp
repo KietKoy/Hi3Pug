@@ -36,22 +36,19 @@
                     </div>
                 
                     <ul class="header-user-menu">
-                        <li class="header-user-item">
-                            <a href="">Tài khoản của tôi</a>
-                        </li>
                         <li class="header-user-item header-user-item--separate">
-                            <a href="">Đăng xuất</a>
+                            <a href="UserControllerServlet?logout=1">SIGN OUT</a>
                         </li>
                     </ul>
                 </li>
             </div>
         </div>
 
-        <div class="content">
+        <div class="content p-t-100">
             <form action="DrinkControllerServlet" class="info" method="post">
                 <div class="upload">
                     <div class="upload-file">
-                        <img id="output" src="./assets/img/<%=drink.getIMG()%>"/>
+                        <img id="output" src="./assets/img/<%=drink.getIMG()%>" />
                     </div>
                     <input type="file" accept="image/*" onchange="loadFile(event)" value="<%= drink.getIMG()%>" name="img">
                 </div>
@@ -108,8 +105,9 @@
             var output = document.getElementById('output');
             output.src = URL.createObjectURL(event.target.files[0]);
             output.value = event.target.files[0].name;
+            console.log(output.src);
             output.onload = function() {
-            URL.revokeObjectURL(output.src) // free memory
+            	URL.revokeObjectURL(output.src) // free memory
             }
         };
         </script>

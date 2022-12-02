@@ -1,7 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import model.BEAN.Drink;
 import model.BEAN.User;
@@ -28,6 +31,9 @@ public class DrinkControllerServlet extends HttpServlet{
 		HttpSession session = request.getSession();
 		User_BO user_BO = new User_BO();
 		Drink_BO drink_BO = new Drink_BO();
+		if(request.getParameter("again")!=null) {
+			response.sendRedirect("./AdminMenu.jsp");
+		}
 		if(request.getParameter("mod1")!=null) {
 			String checkAdmin = request.getParameter("isAdmin");
 			int isAdmin = Integer.parseInt(checkAdmin);
@@ -84,6 +90,20 @@ public class DrinkControllerServlet extends HttpServlet{
 				}
 			}
 		}
+		if(request.getParameter("delete")!=null) {
+			String iduser = request.getParameter("iduser");
+			String role = request.getParameter("Role");
+			User user = user_BO.getUser(iduser);
+			drink_BO.delDrink(request.getParameter("delete"));
+			List<Drink> list_drink = new ArrayList<Drink>();
+			list_drink = drink_BO.getAllDrink();
+			session = request.getSession();
+			session.setAttribute("user", user);
+			session.setAttribute("role", role);
+			session.setAttribute("list_drink", list_drink);
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminMenu.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**
@@ -111,7 +131,7 @@ public class DrinkControllerServlet extends HttpServlet{
 				rd.forward(request, response);
 			}
 		}
-		if(request.getParameter("update1") != null) {
+		if(request.getParameter("update1") != null) { 
 			String id = request.getParameter("iddrink");
 			String name = request.getParameter("name");
 			String ingredient = request.getParameter("ingredient");
@@ -171,8 +191,8 @@ public class DrinkControllerServlet extends HttpServlet{
 			List<String> listTypeDrink = new ArrayList<String>();
 			listDrink = drink_BO.getDrinkByType(typeSearch);
 			listTypeDrink = drink_BO.getAllTypeDrink();
-			session.setAttribute("list_drink", listDrink);
-			session.setAttribute("list_type_drink", listTypeDrink);
+			request.setAttribute("list_drink", listDrink);
+			request.setAttribute("list_type_drink", listTypeDrink);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/NoLogin.jsp");
 			rd.forward(request, response);
 		}

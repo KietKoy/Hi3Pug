@@ -21,7 +21,7 @@
     <div id="main">
         <div id="header">
             <div class="header-container">
-                <a href="./NhanVien.html" class="header-logo">
+                <a href="" class="header-logo">
                     <img src="./assets/img/logo.png" alt="">
                 </a>
                 <span class="text-heading text-name">HI3PUG COFFEE SHOP</span>
@@ -33,20 +33,17 @@
                     </div>
                 
                     <ul class="header-user-menu">
-                        <li class="header-user-item">
-                            <a href="">ACCOUNT</a>
-                        </li>
                         <li class="header-user-item header-user-item--separate">
-                            <a href="./NoLogin.html">SIGN OUT</a>
+                            <a href="UserControllerServlet?logout=1">SIGN OUT</a>
                         </li>
                     </ul>
                 </li>
             </div>
         </div>
 
-        <div class="content p-10">
+        <div class="content p-t-80">
             <form action="UserControllerServlet"  class="info" method="post">
-                <div class="upload m-t-80">
+                <div class="upload">
                     <div class="upload-file">
                         <img id="output"/>
                     </div>

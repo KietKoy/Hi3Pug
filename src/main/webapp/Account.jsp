@@ -36,20 +36,17 @@
                     </div>
                 
                     <ul class="header-user-menu">
-                        <li class="header-user-item">
-                            <a href="">ACCOUNT</a>
-                        </li>
                         <li class="header-user-item header-user-item--separate">
-                            <a href="./NoLogin.html">SIGN OUT</a>
+                            <a href="UserControllerServlet?logout=1">SIGN OUT</a>
                         </li>
                     </ul>
                 </li>
             </div>
         </div>
 
-        <div class="content p-10">
+        <div class="content p-t-80">
             <form action="UserControllerServlet"  class="info" method="post">
-                <div class="upload m-t-80">
+                <div class="upload">
                     <div class="upload-file">
                         <img id="output" src="./assets/img/<%=user1.getIMG()%>">
                     </div>
@@ -77,10 +74,12 @@
                             <td><label for="">Date of birth:</label></td>
                             <td class="p-t-20">
                                 <input type="date" name="date" id="" class="info-input" value="<%= user1.getDateOfBirth()%>"><br>
+
                             </td>
                         </tr>
                         <tr>
                             <td><label for="">Username:</label></td>
+
                             <td class="p-t-20">
                                 <input type="text" name="username" id="" class="info-input" value="<%= acc.getUsername()%>"><br>
                             </td>
@@ -94,6 +93,7 @@
                         <tr>
                             <td><input type="text" value="<%= isAdmin %>" name="isAdmin" style="width: 0; height: 0; visibility: hidden;"></td>
                             <td class="p-t-20"><input type="submit" value="SAVE" class="btn content-btn m-t-20" name="save"></td>
+
                         </tr>
                     </table>
                     

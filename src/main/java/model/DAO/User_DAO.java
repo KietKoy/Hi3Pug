@@ -88,31 +88,6 @@ public class User_DAO {
 		}
 		return null;
 	}
-//	public List<User> getUserbyName(String nameSearch) {
-//		List<User> res = new ArrayList<User>();
-//		try 
-//		{
-//			String sql="SELECT * FROM user where " ; 
-//			ResultSet rs= querry(sql);
-//			while (rs.next())
-//			{
-//				String id=rs.getString(1) ; 
-//				String name = rs.getString(2);
-//				Date date = rs.getDate(3);
-//				String email =rs.getString(4);
-//				String phone = rs.getString(5);
-//				String img = rs.getString(6);
-//				User user = new User(id, name, email, phone, img, date);
-//				res.add(user);
-//			}
-//			rs.close();
-//			
-//		} catch (Exception e)
-//		{
-//			System.out.println("err "+e);
-//		} ;  
-//		return res;
-//	}
 	public void delUser(String MaUser) 
 	{
 		String sql = "delete from user where MaTK = " + MaUser;

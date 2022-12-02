@@ -155,9 +155,10 @@ public class Drink_DAO {
 		}
 		return res;
 	}
-	public void delDoUong(String MaDoUong) 
+
+	public void delDrink(String MaDoUong) 
 	{
-		String sql = "delete from drink where MaTK = " + MaDoUong;
+		String sql = "delete from drink where ID_Drink = '" + MaDoUong + "'";
 		excute_update(sql);
 	}
 	public void addDoUong(String MaDoUong, String TenDoUong,String type, String NguyenLieu, double Gia, String img) 

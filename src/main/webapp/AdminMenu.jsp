@@ -82,21 +82,28 @@
                 <% for(int i = 0; i < Math.ceil((double)list_Drink.size()/4); i++){ %>
                 	<div class="row m-t-60">
                 <% for(int j = i*4; j < (i+1)*4; j++) {
-                	if(j >= list_Drink.size()) break;
+                	if(j >= list_Drink.size()){
                 %>
+                
+                <div class="col">
+                        </div>
+                        
+                 <%} else { %>
                 	<div class="col">
                             <a class="home-product-item" href="#">
-                                <div class="home-product-item__img" style="background-image: url(./assets/img/<%= list_Drink.get(j).getIMG() %>); "></div>
+                                <div class="home-product-item__img" style="background-image: url(./assets/img/<%= list_Drink.get(j).getIMG() %>); " ></div>
                                 <h4 class="home-product-item__name"><%= list_Drink.get(j).getName_Drink() %></h4>
                                 <div class="home-product-item-btn">
                                     <a href="DrinkControllerServlet?update=<%= list_Drink.get(j).getID_Drink()%>&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn btn-small">UPDATE</a>
-                                    <a href="" class="btn content-btn btn-small">DELETE</a>
+                                    <a href="DrinkControllerServlet?delete=<%= list_Drink.get(j).getID_Drink()%>&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn btn-small">DELETE</a>
                                 </div>
                             </a>
                         </div>
                 <%} %>
-					</div>
-                <% } %>       
+
+                <% } %>
+                	</div>
+                 <% } %>       
                 </div>
             </div>  
         </div>

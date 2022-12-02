@@ -46,4 +46,11 @@ public class Drink_BO {
 	public List<Drink> getDrinkByType(String typeSearch){
 		return new Drink_DAO().getDrinkByType(typeSearch);
 	}
+	public void delDrink(String MaDoUong) {
+		Drink_DAO drink_DAO = new Drink_DAO();
+		if(isValid(MaDoUong)) {
+			drink_DAO.delDrink(MaDoUong);
+		}
+	}
+	
 }

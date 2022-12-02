@@ -93,7 +93,7 @@
             <div class="location-slider">
                 <h1 class="text-sub-heading">DA NANG</h1>
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: 80%; margin: 0 auto;">
-                    <ol class="carousel-indicators">
+                    <ol class="carousel-indicators" style="z-index : 1">
                       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                       <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
