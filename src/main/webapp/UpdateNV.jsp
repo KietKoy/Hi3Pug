@@ -39,9 +39,9 @@
             </div>
         </div>
 
-        <div class="content p-10">
+        <div class="content p-t-80">
             <form action=""  class="info">
-                <div class="upload m-t-80">
+                <div class="upload">
                     <div class="upload-file">
                         <img id="output"/>
                     </div>
@@ -62,30 +62,9 @@
                             <td class="p-t-20"><input type="text" name="phone" id="" class="info-input"></td>
                         </tr>
                         <tr>
-                            <td><label for="">Sex:</label></td>
-                            <td class="p-t-20">
-                                <input type="radio" name="" id="">
-                                <label for="">Male</label>
-                                <input type="radio" name="" id="">
-                                <label for="">Female</label><br>
-                            </td>
-                        </tr>
-                        <tr>
                             <td><label for="">Date of birth:</label></td>
                             <td class="p-t-20">
                                 <input type="date" name="day" id="" class="info-input"><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="">Username:</label></td>
-                            <td class="p-t-20">
-                                <input type="text" name="username" id="" class="info-input"><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="">Password:</label></td>
-                            <td class="p-t-20">
-                                <input type="text" name="username" id="" class="info-input"><br>
                             </td>
                         </tr>
                         <tr>

@@ -23,7 +23,7 @@
             <div id="header">
                 <div class="header-container">
                     <div class="header-logo">
-                        <img src="./assets/img/logo.png" alt="">
+                        <a href="DrinkControllerServlet?again=1"><img src="./assets/img/logo.png" alt=""></a>
                     </div>
                     <span class="text-heading text-name">HI3PUG COFFEE SHOP</span>
                     <li class="header-item header-user">
@@ -35,23 +35,23 @@
                     
                         <ul class="header-user-menu">
                             <li class="header-user-item">
-                                <a href="">Tài khoản của tôi</a>
+                                <a href="">ACCOUNT</a>
                             </li>
                             <li class="header-user-item header-user-item--separate">
-                                <a href="">Đăng xuất</a>
+                                <a href="">SIGN IN</a>
                             </li>
                         </ul>
                     </li>
                 </div>
             </div>
 
-            <div class="content">
+            <div class="content p-t-100">
                 <form action="DrinkControllerServlet" class="info">
                     <div class="upload">
                         <div class="upload-file">
                             <img id="output"/>
                         </div>
-                        <input type="file" accept="image/*" onchange="loadFile(event)" name="img">
+                        <input type="file" accept="image/*" onchange="loadFile(event)" name="img" required>
                     </div>
 
                     <div >
@@ -71,7 +71,7 @@
                             <tr>
                                 <td><label for="">Type:</label></td>
                                 <td>
-                                	<select name="typedrink" class="select_drink" style="background-color: #FFEFCD; color: #514236">
+                                	<select name="typedrink" class="select_drink" style="background-color: #FFEFCD; color: #514236; margin-top: 16px">
 		                            <% for(int i = 0; i < listTypeDrink.size(); i++ ) {
 		                            %>
 		                                <option value="<%=listTypeDrink.get(i)%>"><%=  listTypeDrink.get(i)%></option>

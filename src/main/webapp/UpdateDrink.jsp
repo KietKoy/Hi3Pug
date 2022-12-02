@@ -28,7 +28,7 @@
                 </div>
                 <span class="text-heading text-name">HI3PUG COFFEE SHOP</span>
                 <li class="header-item header-user">
-                    <img src="./assets/img/<%= user.getIMG() %> alt="" class="header-user-img">
+                    <img src="./assets/img/<%= user.getIMG() %>" alt="" class="header-user-img">
                     <div class="header-user-name">
                         <span><%= user.getName() %></span>
                         <span><%= role %></span>
@@ -36,21 +36,21 @@
                 
                     <ul class="header-user-menu">
                         <li class="header-user-item">
-                            <a href="">Tài khoản của tôi</a>
+                            <a href="">ACCOUNT</a>
                         </li>
                         <li class="header-user-item header-user-item--separate">
-                            <a href="">Đăng xuất</a>
+                            <a href="">SIGN IN</a>
                         </li>
                     </ul>
                 </li>
             </div>
         </div>
 
-        <div class="content">
-            <form action="DrinkControllerServlet" class="info" method="post">
+        <div class="content p-t-100">
+            <form action="DrinkControllerServlet" class="info" method="post" ENCTYPE="multipart/form-data">
                 <div class="upload">
                     <div class="upload-file">
-                        <img id="output" src="./assets/img/<%=drink.getIMG()%>"/>
+                        <img id="output" src="./assets/img/<%=drink.getIMG()%>" />
                     </div>
                     <input type="file" accept="image/*" onchange="loadFile(event)" value="<%= drink.getIMG()%>" name="img">
                 </div>
@@ -101,12 +101,15 @@
     </div>
 
     <script>
+	    var output = document.getElementById('output');
+	    output.value = <%= drink.getIMG()%>;
         var loadFile = function(event) {
             var output = document.getElementById('output');
             output.src = URL.createObjectURL(event.target.files[0]);
             output.value = event.target.files[0].name;
+            console.log(output.src);
             output.onload = function() {
-            URL.revokeObjectURL(output.src) // free memory
+            	URL.revokeObjectURL(output.src) // free memory
             }
         };
         </script>
