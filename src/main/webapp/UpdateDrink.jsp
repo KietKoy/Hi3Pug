@@ -28,7 +28,7 @@
                 </div>
                 <span class="text-heading text-name">HI3PUG COFFEE SHOP</span>
                 <li class="header-item header-user">
-                    <img src="./assets/img/<%= user.getIMG() %> alt="" class="header-user-img">
+                    <img src="./assets/img/<%= user.getIMG() %>" alt="" class="header-user-img">
                     <div class="header-user-name">
                         <span><%= user.getName() %></span>
                         <span><%= role %></span>

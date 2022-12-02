@@ -3,8 +3,7 @@ package model.BEAN;
 import java.sql.Date;
 
 public class User {
-	String 	
-	ID_User, Name, Email, Phone, IMG;
+	String ID_User, Name, Email, Phone, IMG;
 	Date dateOfBirth;
 	
 	public User(String iD_User, String name, String email, String phone, String iMG, Date dateOfBirth) {

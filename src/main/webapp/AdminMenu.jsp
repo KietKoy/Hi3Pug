@@ -41,7 +41,7 @@
                 
                     <ul class="header-user-menu">
                         <li class="header-user-item">
-                            <a href="">ACCOUNT</a>
+                            <a href="UserControllerServlet?acc=<%= user.getID_User()%>">ACCOUNT</a>
                         </li>
                         <li class="header-user-item header-user-item--separate">
                             <a href="">SIGN OUT</a>
@@ -54,13 +54,13 @@
         <div class="content  p-0">
             <div class="content-nav">
                 <a href="" class="btn content-btn m-t-60">MENU</a><br>
-                <a href="UserControllerServlet?mod1=1&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn center">NHAN VIEN</a>
+                <a href="UserControllerServlet?mod1=1&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn center">EMPLOYEE</a>
             </div>
             <div class="content-form">
                 
                 <div class="content-search m-t-60">
                     <a href="DrinkControllerServlet?mod1=1&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn">ADD</a>
-                    <form action="DrinkControllerServlet">
+                    <form action="DrinkControllerServlet" method="post">
                         <div class="drink content-menu">
                             <select name="typedrink" class="select_drink">
                             <% for(int i = 0; i < listTypeDrink.size(); i++ ) {

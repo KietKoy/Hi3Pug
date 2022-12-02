@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page language="java" import="model.BEAN.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +14,10 @@
     <link rel="stylesheet" href="./assets/css/grid.css">
 </head>
 <body>
+		<% 	
+			User user = (User)session.getAttribute("user");
+    		String role = (String)session.getAttribute("role");
+    	%>
     <div id="main">
         <div id="header">
             <div class="header-container">
@@ -21,10 +26,10 @@
                 </a>
                 <span class="text-heading text-name">HI3PUG COFFEE SHOP</span>
                 <li class="header-item header-user">
-                    <img src="./assets/img/user.png" alt="" class="header-user-img">
+                    <img src="./assets/img/<%= user.getIMG() %>" alt="" class="header-user-img">
                     <div class="header-user-name">
-                        <span>Do Nho</span>
-                        <span>Admin</span>
+                        <span><%= user.getName() %></span>
+                        <span><%= role %></span>
                     </div>
                 
                     <ul class="header-user-menu">
@@ -40,12 +45,12 @@
         </div>
 
         <div class="content p-10">
-            <form action=""  class="info">
+            <form action="UserControllerServlet"  class="info" method="post">
                 <div class="upload m-t-80">
                     <div class="upload-file">
                         <img id="output"/>
                     </div>
-                    <input type="file" accept="image/*" onchange="loadFile(event)">
+                    <input type="file" accept="image/*" onchange="loadFile(event)" name="img">
                 </div>
 
                     <table>
@@ -62,47 +67,33 @@
                             <td class="p-t-20"><input type="text" name="phone" id="" class="info-input"></td>
                         </tr>
                         <tr>
-                            <td><label for="">Sex:</label></td>
-                            <td class="p-t-20">
-                                <input type="radio" name="" id="">
-                                <label for="">Male</label>
-                                <input type="radio" name="" id="">
-                                <label for="">Female</label><br>
-                            </td>
-                        </tr>
-                        <tr>
                             <td><label for="">Date of birth:</label></td>
                             <td class="p-t-20">
                                 <input type="date" name="day" id="" class="info-input"><br>
                             </td>
                         </tr>
                         <tr>
-                            <td><label for="">Username:</label></td>
-                            <td class="p-t-20">
-                                <input type="text" name="username" id="" class="info-input"><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="">Password:</label></td>
-                            <td class="p-t-20">
-                                <input type="text" name="username" id="" class="info-input"><br>
-                            </td>
+                            <td><label for="">Email:</label></td>
+                            <td class="p-t-20"><input type="email" name="email" id="" class="info-input"></td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td class="p-t-20"><input type="submit" value="ADD" class="btn content-btn m-t-20"></td>
+                            <td class="p-t-20"><input type="submit" value="add" class="btn content-btn m-t-20" name="add"></td>
                         </tr>
+                        
                     </table>
-                    
+                    <input type="text" value="<%= user.getID_User() %>" name="iduser" style="width: 0; height: 0; visibility: hidden;">
+                    <input type="text" value="<%= role %>" name="role" style="width: 0; height: 0; visibility: hidden;">
+                    </form>
                 </div>
-            </form>
+            
         </div>
-    </div>
 
     <script>
         var loadFile = function(event) {
             var output = document.getElementById('output');
             output.src = URL.createObjectURL(event.target.files[0]);
+            output.value = event.target.files[0].name;
             output.onload = function() {
             URL.revokeObjectURL(output.src) // free memory
             }
