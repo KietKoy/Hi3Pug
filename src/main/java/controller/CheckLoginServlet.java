@@ -45,6 +45,7 @@ public class CheckLoginServlet extends HttpServlet{
 			listDrink = drink_bo.getAllDrink();
 			listTypeDrink = drink_bo.getAllTypeDrink();
 			if(acc.getIsAdmin()) {
+				System.out.println(listDrink.get(0).getID_Drink());
 				HttpSession session = req.getSession();
 				session.setAttribute("user", user);
 				session.setAttribute("role", "admin");

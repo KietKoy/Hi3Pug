@@ -1,7 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import model.BEAN.Drink;
 import model.BEAN.User;
@@ -28,6 +31,9 @@ public class DrinkControllerServlet extends HttpServlet{
 		HttpSession session = request.getSession();
 		User_BO user_BO = new User_BO();
 		Drink_BO drink_BO = new Drink_BO();
+		if(request.getParameter("again")!=null) {
+			response.sendRedirect("./AdminMenu.jsp");
+		}
 		if(request.getParameter("mod1")!=null) {
 			List<String> listTypeDrink = new ArrayList<String>();
 			listTypeDrink = drink_BO.getAllTypeDrink();
@@ -46,6 +52,7 @@ public class DrinkControllerServlet extends HttpServlet{
 			String role = request.getParameter("Role");
 			Drink drink = drink_BO.getDoUong(iddrink);
 			User user = user_BO.getUser(iduser);
+			System.out.println(user.getIMG());
 			List<String> listTypeDrink = drink_BO.getAllTypeDrink();
 			session.setAttribute("user", user);
 			session.setAttribute("role", role);
@@ -142,15 +149,14 @@ public class DrinkControllerServlet extends HttpServlet{
 				rd.forward(request, response);
 			}
 		}
-		if(request.getParameter("update1") != null) {
-			System.out.println("Nho Do");
+		if(request.getParameter("update1") != null) { 
 			String id = request.getParameter("iddrink");
-			System.out.println(id);
 			String name = request.getParameter("name");
 			String ingredient = request.getParameter("ingredient");
 			String type = request.getParameter("typedrink");
 			String price = request.getParameter("price");
 			String img = request.getParameter("img");
+			System.out.println(img);
 			String iduser =request.getParameter("iduser");
 			String role = request.getParameter("role");
 			if(drink_BO.CheckUpdate(id, name, type, ingredient, Double.parseDouble(price), img)) {

@@ -10,7 +10,7 @@ import java.util.List;
 import model.BEAN.*;
 public class User_DAO {
 	static String NAME_DB = "com.mysql.jdbc.Driver";
-	static String URL = "jdbc:mysql://localhost/ltmang";
+	static String URL = "jdbc:mysql://localhost/ltm";
 	public ResultSet querry(String sql)
 	{
 		ResultSet rs = null;

@@ -39,9 +39,9 @@
             </div>
         </div>
 
-        <div class="content p-10">
+        <div class="content p-t-80">
             <form action=""  class="info">
-                <div class="upload m-t-80">
+                <div class="upload">
                     <div class="upload-file">
                         <img id="output"/>
                     </div>
@@ -51,46 +51,37 @@
                     <table>
                         <tr>
                             <td><label for="">ID Employee:</label></td>
-                            <td class="p-t-20"><input type="text" name="id" id="" class="info-input"></td>
+                            <td><input type="text" name="id" id="" class="info-input" readonly></td>
                         </tr>
                         <tr>
                             <td><label for="">Name:</label></td>
-                            <td class="p-t-20"><input type="text" name="name" id="" class="info-input"></td>
+                            <td><input type="text" name="name" id="" class="info-input"></td>
                         </tr>
                         <tr>
                             <td><label for="">Phone:</label></td>
-                            <td class="p-t-20"><input type="text" name="phone" id="" class="info-input"></td>
-                        </tr>
-                        <tr>
-                            <td><label for="">Sex:</label></td>
-                            <td class="p-t-20">
-                                <input type="radio" name="" id="">
-                                <label for="">Male</label>
-                                <input type="radio" name="" id="">
-                                <label for="">Female</label><br>
-                            </td>
+                            <td><input type="text" name="phone" id="" class="info-input"></td>
                         </tr>
                         <tr>
                             <td><label for="">Date of birth:</label></td>
-                            <td class="p-t-20">
+                            <td>
                                 <input type="date" name="day" id="" class="info-input"><br>
                             </td>
                         </tr>
                         <tr>
                             <td><label for="">Username:</label></td>
-                            <td class="p-t-20">
+                            <td>
                                 <input type="text" name="username" id="" class="info-input"><br>
                             </td>
                         </tr>
                         <tr>
                             <td><label for="">Password:</label></td>
-                            <td class="p-t-20">
+                            <td>
                                 <input type="text" name="username" id="" class="info-input"><br>
                             </td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td class="p-t-20"><input type="submit" value="SAVE" class="btn content-btn m-t-20"></td>
+                            <td><input type="submit" value="SAVE" class="btn content-btn m-t-20"></td>
                         </tr>
                     </table>
                     
