@@ -27,49 +27,30 @@ public class UserControllerServlet extends HttpServlet{
 		User_BO user_BO = new User_BO();
 		Drink_BO drink_BO = new Drink_BO();
 		if(request.getParameter("mod1")!=null) {
-//			String iduser = request.getParameter("iduser");
-//			String role = request.getParameter("Role");
-//			User user = user_BO.getUser(iduser);
+			String checkAdmin = request.getParameter("isAdmin");
 			List<User> listUser = new ArrayList<User>();
 			listUser = user_BO.getAllUser();
-//			session.setAttribute("user", user);
-//			session.setAttribute("role", role);
 			session.setAttribute("listuser", listUser);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminNV.jsp");
-			rd.forward(request, response);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminNV.jsp");
+				rd.forward(request, response);
 		}
 		if(request.getParameter("mod2")!=null) {
-//			String iduser = request.getParameter("iduser");
-//			String role = request.getParameter("Role");
-//			User user = user_BO.getUser(iduser);
 			List<Drink> listDrink = new ArrayList<Drink>();
 			List<String> listTypeDrink = new ArrayList<String>();
 			listTypeDrink = drink_BO.getAllTypeDrink();
 			listDrink = drink_BO.getAllDrink();
-//			session.setAttribute("user", user);
-//			session.setAttribute("role", role);
 			session.setAttribute("list_drink", listDrink);
 			session.setAttribute("list_type_drink", listTypeDrink);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminMenu.jsp");
 			rd.forward(request, response);
 		}
 		if(request.getParameter("add") != null) {
-//			String iduser = request.getParameter("iduser");
-//			String role = request.getParameter("Role");
-//			User user = user_BO.getUser(iduser);
-//			session.setAttribute("user", user);
-//			session.setAttribute("role", role);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddNV.jsp");
 			rd.forward(request, response);
 		}
 		if(request.getParameter("update")!=null) {
 			String iduserUpdate = request.getParameter("update");
-//			String iduser = request.getParameter("iduser");
-//			String role = request.getParameter("Role");
 			User userupdate = user_BO.getUser(iduserUpdate);
-//			User user = user_BO.getUser(iduser);
-//			session.setAttribute("user", user);
-//			session.setAttribute("role", role);
 			session.setAttribute("userupdate", userupdate);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/UpdateNV.jsp");
 			rd.forward(request, response);
@@ -77,10 +58,22 @@ public class UserControllerServlet extends HttpServlet{
 		Account_BO account_BO = new Account_BO();
 		if(request.getParameter("acc") != null) {
 			User user = (User) session.getAttribute("user");
+			String checkAdmin = request.getParameter("isAdmin");
+			int isAdmin = Integer.parseInt(checkAdmin);
 			Account acccount = account_BO.getAccountbyID_Account(user.getID_User());
 			request.setAttribute("user", user);
 			request.setAttribute("account", acccount);
+			request.setAttribute("isAdmin", isAdmin);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/Account.jsp");
+			rd.forward(request, response);
+		}
+		if(request.getParameter("logout") != null) {
+			session.invalidate();
+			List<Drink> listDrink = drink_BO.getAllDrink();
+			List<String> listTypeDrink = drink_BO.getAllTypeDrink();
+			request.setAttribute("list_drink", listDrink);
+			request.setAttribute("list_type_drink", listTypeDrink);
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/NoLogin.jsp");
 			rd.forward(request, response);
 		}
 	}
@@ -100,8 +93,6 @@ public class UserControllerServlet extends HttpServlet{
 			String date = request.getParameter("day");
 			String email = request.getParameter("email");
 			String img = request.getParameter("img");
-//			String iduser = request.getParameter("iduser");
-//			String role = request.getParameter("role");
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 			java.util.Date date1 = null;
 			try {
@@ -115,24 +106,22 @@ public class UserControllerServlet extends HttpServlet{
 				boolean a = account_BO.checkAdd(id, id, id, 0);
 				List<User> listUser = new ArrayList<User>();
 				listUser = user_BO.getAllUser();
-//				User user = user_BO.getUser(iduser);
-//				session.setAttribute("user", user);
-//				session.setAttribute("role", role);
 				session.setAttribute("listuser", listUser);
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminNV.jsp");
 				rd.forward(request, response);
 			}
 		}
 		if(request.getParameter("update1") != null) {
-			System.out.println("hihi");
 			String id = request.getParameter("id");
 			String name = request.getParameter("name");
 			String date = request.getParameter("date");
 			String email = request.getParameter("email");
 			String phone = request.getParameter("phone");
 			String img = request.getParameter("img");
-//			String iduser =request.getParameter("iduser");
-//			String role = request.getParameter("role");
+			if(img == "") {
+				User user = (User)session.getAttribute("user");
+				img = user.getIMG();
+				}
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 			java.util.Date date1 = null;
 			try {
@@ -145,9 +134,6 @@ public class UserControllerServlet extends HttpServlet{
 			if(user_BO.checkUpdate(id, name, sqlDate, email, phone, img)) {
 				List<User> listUser = new ArrayList<User>();
 				listUser = user_BO.getAllUser();
-//				User user = user_BO.getUser(iduser);
-//				session.setAttribute("user", user);
-//				session.setAttribute("role", role);
 				session.setAttribute("listuser", listUser);
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminNV.jsp");
 				rd.forward(request, response);
@@ -158,13 +144,8 @@ public class UserControllerServlet extends HttpServlet{
 			System.out.println(txtSearch);
 			String typeSearch = request.getParameter("typeSearch");
 			System.out.println(typeSearch);
-//			String iduser = request.getParameter("iduser");
-//			String role = request.getParameter("role");
-//			User user = user_BO.getUser(iduser);
 			List<User> listUser = new ArrayList<User>();
 			listUser = user_BO.getUserbySearch(txtSearch, typeSearch);
-//			session.setAttribute("user", user);
-//			session.setAttribute("role", role);
 			session.setAttribute("listuser", listUser);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminNV.jsp");
 			rd.forward(request, response);
@@ -178,6 +159,8 @@ public class UserControllerServlet extends HttpServlet{
 			String img = request.getParameter("img");
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
+			String checkAdmin = request.getParameter("isAdmin");
+			int isAdmin = Integer.parseInt(checkAdmin);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 			java.util.Date date1 = null;
 			try {
@@ -193,8 +176,19 @@ public class UserControllerServlet extends HttpServlet{
 				User user = user_BO.getUser(id);
 				session.setAttribute("user", user);
 				session.setAttribute("listuser", listUser);
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminNV.jsp");
-				rd.forward(request, response);
+				if(isAdmin == 1) {
+					RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminNV.jsp");
+					rd.forward(request, response);
+				}
+				else {
+					Drink_BO drink_BO = new Drink_BO();
+					List<Drink> listDrink = drink_BO.getAllDrink();
+					List<String> listTypeDrink = drink_BO.getAllTypeDrink();
+					session.setAttribute("list_drink", listDrink);
+					session.setAttribute("list_type_drink", listTypeDrink);
+					RequestDispatcher rd = getServletContext().getRequestDispatcher("/NV.jsp");
+					rd.forward(request, response);
+				}
 			}
 		}
 	}

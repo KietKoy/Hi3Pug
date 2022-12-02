@@ -18,6 +18,7 @@
     	<% User user = (User)session.getAttribute("user");
     		String role = (String)session.getAttribute("role");
     		List<String> listTypeDrink = (List<String>) session.getAttribute("listTypeDrink"); 
+    		int isAdmin = (int)request.getAttribute("isAdmin");
     	%>
         <div id="main">
             <div id="header">
@@ -85,7 +86,9 @@
                                 <td><label for="">VND</label></td>
                             </tr>
                             <tr>
-                                <td></td>
+                                <td>
+                                	<input type="text" value="<%= isAdmin %>" name="isAdmin" style="width: 0; height: 0; visibility: hidden;">
+                                </td>
                                 <td>
                                     <input type="submit" value="ADD" class="btn content-btn  m-20" name="add">
                                 </td>

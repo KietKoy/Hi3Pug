@@ -22,14 +22,13 @@ public class MainServlet extends HttpServlet{
 	}
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		Drink_BO drink_BO = new Drink_BO();
 		List<Drink> listDrink = new ArrayList<Drink>();
 		List<String> listTypeDrink = new ArrayList<String>();
 		listDrink = drink_BO.getAllDrink();
 		listTypeDrink = drink_BO.getAllTypeDrink();
-		session.setAttribute("list_drink", listDrink);
-		session.setAttribute("list_type_drink", listTypeDrink);
+		request.setAttribute("list_drink", listDrink);
+		request.setAttribute("list_type_drink", listTypeDrink);
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/NoLogin.jsp");
 		rd.forward(request, response);
 	}

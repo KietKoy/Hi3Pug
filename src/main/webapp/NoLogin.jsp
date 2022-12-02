@@ -21,8 +21,8 @@
 </head>
 <body>
 	<% 
-		List<Drink> list_Drink = (List<Drink>)session.getAttribute("list_drink");
-		List<String> listTypeDrink = (List<String>)session.getAttribute("list_type_drink");
+		List<Drink> list_Drink = (List<Drink>)request.getAttribute("list_drink");
+		List<String> listTypeDrink = (List<String>)request.getAttribute("list_type_drink");
 	%>
     <div class="main">
         <div id="header">

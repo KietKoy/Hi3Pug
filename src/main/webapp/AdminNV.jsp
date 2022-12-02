@@ -39,10 +39,10 @@
                 
                     <ul class="header-user-menu">
                         <li class="header-user-item">
-                            <a href="">ACCOUNT</a>
+                            <a href="UserControllerServlet?acc=<%= user.getID_User()%>&isAdmin=1">ACCOUNT</a>
                         </li>
                         <li class="header-user-item header-user-item--separate">
-                            <a href="">SIGN IN</a>
+                            <a href="UserControllerServlet?logout=1">SIGN OUT</a>
                         </li>
                     </ul>
                 </li>

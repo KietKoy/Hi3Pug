@@ -41,10 +41,10 @@
                 
                     <ul class="header-user-menu">
                         <li class="header-user-item">
-                            <a href="UserControllerServlet?acc=<%= user.getID_User()%>">ACCOUNT</a>
+                            <a href="UserControllerServlet?acc=<%= user.getID_User()%>&isAdmin=1">ACCOUNT</a>
                         </li>
                         <li class="header-user-item header-user-item--separate">
-                            <a href="">SIGN OUT</a>
+                            <a href="UserControllerServlet?logout=1">SIGN OUT</a>
                         </li>
                     </ul>
                 </li>
@@ -54,12 +54,12 @@
         <div class="content  p-0">
             <div class="content-nav">
                 <a href="" class="btn content-btn m-t-60">MENU</a><br>
-                <a href="UserControllerServlet?mod1=1&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn center">EMPLOYEE</a>
+                <a href="UserControllerServlet?mod1=1" class="btn content-btn center">EMPLOYEE</a>
             </div>
             <div class="content-form">
                 
                 <div class="content-search m-t-60">
-                    <a href="DrinkControllerServlet?mod1=1&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn">ADD</a>
+                    <a href="DrinkControllerServlet?mod1=1&isAdmin=1" class="btn content-btn">ADD</a>
                     <form action="DrinkControllerServlet" method="post">
                         <div class="drink content-menu">
                             <select name="typedrink" class="select_drink">
@@ -70,6 +70,7 @@
                             </select>
                             <input type="text" value="<%= user.getID_User() %>" name="iduser" style="width: 0; height: 0; visibility: hidden;">
                             <input type="text" value="<%= role %>" name="role" style="width: 0; height: 0; visibility: hidden;">
+                            <input type="text" value="1" name="isAdmin" style="width: 0; height: 0; visibility: hidden;">
                             <input class="content-input" type="text" name="txt_search" id="" placeholder="Enter drink?">
                             <input type="submit" value="SEARCH" name="search" class="btn content-btn">
                         </div>

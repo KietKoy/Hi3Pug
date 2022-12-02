@@ -19,6 +19,7 @@
 		String role = (String)session.getAttribute("role");
 		User user1 = (User)request.getAttribute("user");
 		Account acc = (Account)request.getAttribute("account");
+		int isAdmin = (int)request.getAttribute("isAdmin");
 	%>
     <div id="main">
         <div id="header">
@@ -91,7 +92,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td></td>
+                            <td><input type="text" value="<%= isAdmin %>" name="isAdmin" style="width: 0; height: 0; visibility: hidden;"></td>
                             <td class="p-t-20"><input type="submit" value="SAVE" class="btn content-btn m-t-20" name="save"></td>
                         </tr>
                     </table>
