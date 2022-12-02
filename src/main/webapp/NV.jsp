@@ -43,10 +43,10 @@
                 
                     <ul class="header-user-menu">
                         <li class="header-user-item">
-                            <a href="./Account.html">ACCOUNT</a>
+                            <a href="UserControllerServlet?acc=<%= user.getID_User()%>&isAdmin=0">ACCOUNT</a>
                         </li>
                         <li class="header-user-item header-user-item--separate">
-                            <a href="">SIGN OUT</a>
+                            <a href="UserControllerServlet?logout=1">SIGN OUT</a>
                         </li>
                     </ul>
                 </li>
@@ -55,16 +55,17 @@
 
         <div class="content">
             <div class="content-search">
-                <a href="" class="btn content-btn">ADD</a>
-                <form action="">
+                <a href="DrinkControllerServlet?mod1=1&isAdmin=0" class="btn content-btn">ADD</a>
+                <form action="DrinkControllerServlet" method="post">
                     <div class="drink content-menu">
-                        <select name="" class="select_drink">
+                        <select name="typedrink" class="select_drink">
                             <% for(int i = 0; i < listTypeDrink.size(); i++ ) {
                             %>
-                                <option value="<%=i%>"><%=  listTypeDrink.get(i)%></option>
+                                <option value="<%=listTypeDrink.get(i)%>"><%= listTypeDrink.get(i)%></option>
                              <%} %>
                         </select>
-                        <input class="content-input" type="text" name="search" id="" placeholder="Enter drink?">
+                        <input type="text" value="0" name="isAdmin" style="width: 0; height: 0; visibility: hidden;">
+                        <input class="content-input" type="text" name="txt_search" id="" placeholder="Enter drink?">
                         <input type="submit" value="SEARCH" name="search" class="btn content-btn">
                     </div>
                 </form>
@@ -72,7 +73,7 @@
 
             <div class="home-product">
             
-            <% for(int i = 0; i < Math.ceil(list_Drink.size()/4); i++){ %>
+            <% for(int i = 0; i < Math.ceil((double)list_Drink.size()/4); i++){ %>
                 	<div class="row sm-gutter">
                 <% for(int j = i*4; j < (i+1)*4; j++) {
                 	if(j >= list_Drink.size()) break;
@@ -82,7 +83,7 @@
                                 <div class="home-product-item__img" style="background-image: url(./assets/img/<%= list_Drink.get(j).getIMG() %>); "></div>
                                 <h4 class="home-product-item__name"><%= list_Drink.get(j).getName_Drink() %></h4>
                                 <div class="home-product-item-btn">
-                                    <a href="" class="btn content-btn">UPDATE</a>
+                                    <a href="DrinkControllerServlet?update2=<%= list_Drink.get(j).getID_Drink()%>" class="btn content-btn">UPDATE</a>
                                     <a href="" class="btn content-btn">DELETE</a>
                                 </div>
                             </a>
@@ -91,9 +92,6 @@
 					</div>
                 <% } %>  
             </div>
-
-
-
         </div>
     </div>
 </body>

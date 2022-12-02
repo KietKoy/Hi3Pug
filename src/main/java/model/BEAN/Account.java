@@ -2,9 +2,9 @@ package model.BEAN;
 
 public class Account {
 	String ID_Account, Username, Password;
-	Boolean isAdmin;
+	int isAdmin;
 	
-	public Account(String ID_Account, String username, String password, Boolean isAdmin) {
+	public Account(String ID_Account, String username, String password, int isAdmin) {
 		super();
 		this.ID_Account = ID_Account;
 		Username = username;
@@ -29,10 +29,10 @@ public class Account {
 	public void setPassword(String password) {
 		Password = password;
 	}
-	public Boolean getIsAdmin() {
+	public int getIsAdmin() {
 		return isAdmin;
 	}
-	public void setIsAdmin(Boolean isAdmin) {
+	public void setIsAdmin(int isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 	

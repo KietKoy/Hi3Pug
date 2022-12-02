@@ -19,6 +19,7 @@
 			String role = (String)session.getAttribute("role");
 			Drink drink = (Drink)session.getAttribute("drink");
 			List<String> listTypeDrink = (List<String>)session.getAttribute("listTypeDrink");
+			int isAdmin = (int)request.getAttribute("isAdmin");
 			%>
     <div id="main">
         <div id="header">
@@ -35,11 +36,8 @@
                     </div>
                 
                     <ul class="header-user-menu">
-                        <li class="header-user-item">
-                            <a href="">ACCOUNT</a>
-                        </li>
                         <li class="header-user-item header-user-item--separate">
-                            <a href="">SIGN IN</a>
+                            <a href="UserControllerServlet?logout=1">SIGN OUT</a>
                         </li>
                     </ul>
                 </li>
@@ -47,7 +45,7 @@
         </div>
 
         <div class="content p-t-100">
-            <form action="DrinkControllerServlet" class="info" method="post" ENCTYPE="multipart/form-data">
+            <form action="DrinkControllerServlet" class="info" method="post">
                 <div class="upload">
                     <div class="upload-file">
                         <img id="output" src="./assets/img/<%=drink.getIMG()%>" />
@@ -87,7 +85,9 @@
                             <td><label for="">VND</label></td>
                         </tr>
                         <tr>
-                            <td></td>
+                            <td>
+                            	<input type="text" value="<%= isAdmin %>" name="isAdmin" style="width: 0; height: 0; visibility: hidden;">
+                            </td>
                             <td>
                                 <input type="submit" value="UPDATE" class="btn content-btn  m-20" name="update1">
                             </td>
@@ -101,8 +101,6 @@
     </div>
 
     <script>
-	    var output = document.getElementById('output');
-	    output.value = <%= drink.getIMG()%>;
         var loadFile = function(event) {
             var output = document.getElementById('output');
             output.src = URL.createObjectURL(event.target.files[0]);

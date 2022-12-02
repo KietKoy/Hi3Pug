@@ -35,49 +35,33 @@ public class DrinkControllerServlet extends HttpServlet{
 			response.sendRedirect("./AdminMenu.jsp");
 		}
 		if(request.getParameter("mod1")!=null) {
+			String checkAdmin = request.getParameter("isAdmin");
+			int isAdmin = Integer.parseInt(checkAdmin);
 			List<String> listTypeDrink = new ArrayList<String>();
 			listTypeDrink = drink_BO.getAllTypeDrink();
-			String iduser = request.getParameter("iduser");
-			String role = request.getParameter("Role");
-			User user = user_BO.getUser(iduser);
-			session.setAttribute("user", user);
-			session.setAttribute("role", role);
 			session.setAttribute("listTypeDrink", listTypeDrink);
+			request.setAttribute("isAdmin", isAdmin);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddDrink.jsp");
 			rd.forward(request, response);
 		}
 		if(request.getParameter("update")!=null) {
 			String iddrink = request.getParameter("update");
-			String iduser = request.getParameter("iduser");
-			String role = request.getParameter("Role");
 			Drink drink = drink_BO.getDoUong(iddrink);
-			User user = user_BO.getUser(iduser);
-			System.out.println(user.getIMG());
 			List<String> listTypeDrink = drink_BO.getAllTypeDrink();
-			session.setAttribute("user", user);
-			session.setAttribute("role", role);
+			request.setAttribute("isAdmin", 1);
 			session.setAttribute("drink", drink);
 			session.setAttribute("listTypeDrink", listTypeDrink);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/UpdateDrink.jsp");
 			rd.forward(request, response);
 		}
-		//User_BO user_BO = new User_BO();
-		if(request.getParameter("search") != null) {
-			String txtSearch = request.getParameter("txt_search");
-			String typeSeatch = request.getParameter("typedrink");
-			String iduser = request.getParameter("iduser");
-			String role = request.getParameter("role");
-			User user = user_BO.getUser(iduser);
-			List<Drink> listDrink = new ArrayList<Drink>();
-			List<String> listTypeDrink = new ArrayList<String>();
-			listDrink = drink_BO.getDrinkbyNameandType(txtSearch, typeSeatch);
-			listTypeDrink = drink_BO.getAllTypeDrink();
-//			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
-			session.setAttribute("role", role);
-			session.setAttribute("list_drink", listDrink);
-			session.setAttribute("list_type_drink", listTypeDrink);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminMenu.jsp");
+		if(request.getParameter("update2")!=null) {
+			String iddrink = request.getParameter("update2");
+			Drink drink = drink_BO.getDoUong(iddrink);
+			List<String> listTypeDrink = drink_BO.getAllTypeDrink();
+			request.setAttribute("isAdmin", 0);
+			session.setAttribute("drink", drink);
+			session.setAttribute("listTypeDrink", listTypeDrink);
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/UpdateDrink.jsp");
 			rd.forward(request, response);
 		}
 		if(request.getParameter("add") != null) {
@@ -87,20 +71,23 @@ public class DrinkControllerServlet extends HttpServlet{
 			String type = request.getParameter("typedrink");
 			String price = request.getParameter("price");
 			String img = request.getParameter("img");
-			String iduser =request.getParameter("iduser");
-			String role = request.getParameter("role");
+			String checkAdmin = request.getParameter("isAdmin");
+			int isAdmin = Integer.parseInt(checkAdmin);
 			if(drink_BO.addDrink(id, name, type, ingredient,Double.parseDouble(price), img)) {
 				List<Drink> listDrink = new ArrayList<Drink>();
 				List<String> listTypeDrink = new ArrayList<String>();
-				User user = user_BO.getUser(iduser);
 				listDrink = drink_BO.getAllDrink();
 				listTypeDrink = drink_BO.getAllTypeDrink();
-				session.setAttribute("user", user);
-				session.setAttribute("role", role);
 				session.setAttribute("list_drink", listDrink);
 				session.setAttribute("list_type_drink", listTypeDrink);
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminMenu.jsp");
-				rd.forward(request, response);
+				if(isAdmin == 1) {
+					RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminMenu.jsp");
+					rd.forward(request, response);
+				}
+				else {
+					RequestDispatcher rd = getServletContext().getRequestDispatcher("/NV.jsp");
+					rd.forward(request, response);
+				}
 			}
 		}
 		if(request.getParameter("delete")!=null) {
@@ -133,16 +120,11 @@ public class DrinkControllerServlet extends HttpServlet{
 			String type = request.getParameter("typedrink");
 			String price = request.getParameter("price");
 			String img = request.getParameter("img");
-			String iduser =request.getParameter("iduser");
-			String role = request.getParameter("role");
 			if(drink_BO.addDrink(id, name, type, ingredient,Double.parseDouble(price), img)) {
 				List<Drink> listDrink = new ArrayList<Drink>();
 				List<String> listTypeDrink = new ArrayList<String>();
-				User user = user_BO.getUser(iduser);
 				listDrink = drink_BO.getAllDrink();
 				listTypeDrink = drink_BO.getAllTypeDrink();
-				session.setAttribute("user", user);
-				session.setAttribute("role", role);
 				session.setAttribute("list_drink", listDrink);
 				session.setAttribute("list_type_drink", listTypeDrink);
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminMenu.jsp");
@@ -156,23 +138,63 @@ public class DrinkControllerServlet extends HttpServlet{
 			String type = request.getParameter("typedrink");
 			String price = request.getParameter("price");
 			String img = request.getParameter("img");
-			System.out.println(img);
-			String iduser =request.getParameter("iduser");
-			String role = request.getParameter("role");
+			String checkAdmin = request.getParameter("isAdmin");
+			int isAdmin = Integer.parseInt(checkAdmin);
+			if(img == "") {
+				Drink drink = (Drink)session.getAttribute("drink");
+				img = drink.getIMG();
+			}
 			if(drink_BO.CheckUpdate(id, name, type, ingredient, Double.parseDouble(price), img)) {
 				List<Drink> listDrink = new ArrayList<Drink>();
 				List<String> listTypeDrink = new ArrayList<String>();
-				User user = user_BO.getUser(iduser);
 				listDrink = drink_BO.getAllDrink();
 				listTypeDrink = drink_BO.getAllTypeDrink();
-				session.setAttribute("user", user);
-				session.setAttribute("role", role);
 				session.setAttribute("list_drink", listDrink);
 				session.setAttribute("list_type_drink", listTypeDrink);
+				if(isAdmin == 1 ) {
+					RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminMenu.jsp");
+					rd.forward(request, response);
+				}
+				else {
+					RequestDispatcher rd = getServletContext().getRequestDispatcher("/NV.jsp");
+					rd.forward(request, response);
+				}
+			}
+		}
+		if(request.getParameter("search") != null) {
+			System.out.println("search");
+			String txtSearch = request.getParameter("txt_search");
+			System.out.println(txtSearch);
+			String typeSeatch = request.getParameter("typedrink");
+			System.out.println(typeSeatch);
+			String checkAdmin = request.getParameter("isAdmin");
+			int isAdmin = Integer.parseInt(checkAdmin);
+			List<Drink> listDrink = new ArrayList<Drink>();
+			List<String> listTypeDrink = new ArrayList<String>();
+			listDrink = drink_BO.getDrinkbyNameandType(txtSearch, typeSeatch);
+			listTypeDrink = drink_BO.getAllTypeDrink();
+			session.setAttribute("list_drink", listDrink);
+			session.setAttribute("list_type_drink", listTypeDrink);
+			if(isAdmin == 1) {
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminMenu.jsp");
 				rd.forward(request, response);
 			}
-
+			else {
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/NV.jsp");
+				rd.forward(request, response);
+			}
+		}
+		if(request.getParameter("search_no_login") != null) {
+			String typeSearch = request.getParameter("typedrink");
+			System.out.println(typeSearch);
+			List<Drink> listDrink = new ArrayList<Drink>();
+			List<String> listTypeDrink = new ArrayList<String>();
+			listDrink = drink_BO.getDrinkByType(typeSearch);
+			listTypeDrink = drink_BO.getAllTypeDrink();
+			request.setAttribute("list_drink", listDrink);
+			request.setAttribute("list_type_drink", listTypeDrink);
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/NoLogin.jsp");
+			rd.forward(request, response);
 		}
 	}
 }

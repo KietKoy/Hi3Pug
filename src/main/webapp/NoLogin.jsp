@@ -1,6 +1,8 @@
 <%@ page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page language="java" import="model.BEAN.*" %>
+    <%@ page language="java" import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +20,10 @@
     <title>Khách không đăng nhập</title>
 </head>
 <body>
+	<% 
+		List<Drink> list_Drink = (List<Drink>)request.getAttribute("list_drink");
+		List<String> listTypeDrink = (List<String>)request.getAttribute("list_type_drink");
+	%>
     <div class="main">
         <div id="header">
             <!-- Bắt đầu phần nav -->
@@ -49,66 +55,33 @@
             <div class="text-content text-content-color">
                 <h2 class="text-heading">MENU</h2>
             </div>
+            <form action="DrinkControllerServlet" method="post">
             <div class="drink">
-                <select name="" class="select_drink">
-                    <option value="1">Cà phê</option>
-                    <option value="2">Trà sữa</option>
-                    <option value="3">Nước ép</option>
-                </select>
-                <button class="btn">SHOW</button>
+                <select name="typedrink" class="select_drink">
+                            <% for(int i = 0; i < listTypeDrink.size(); i++ ) {
+                            %>
+                                <option value="<%=listTypeDrink.get(i)%>"><%=  listTypeDrink.get(i)%></option>
+                             <%} %>
+                            </select>
+                <input type="submit" class="btn content-btn" name="search_no_login" value="SHOW">
             </div>
+            </form>
             <div class="home-product">
-                <div class="row sm-gutter">
-                    <!-- Product item -->
-                    <div class="col l-2-4 m-4 c-6">
-                        <a class="home-product-item" href="#">
-                            <div class="home-product-item__img" style="background-image: url(./assets/img/cafelatte.png); "></div>
-                            <h4 class="home-product-item__name">CAFE LATTE</h4>
-                        </a>
-                    </div>
-                    <div class="col l-2-4 m-4 c-6">
-                        <a class="home-product-item" href="#">
-                            <div class="home-product-item__img" style="background-image: url(./assets/img/capuchino.png) "></div>
-                            <h4 class="home-product-item__name">CAPUCHINO</h4>
-                        </a>
-                    </div>
-                    <div class="col l-2-4 m-4 c-6">
-                        <a class="home-product-item" href="#">
-                            <div class="home-product-item__img" style="background-image: url(./assets/img/berryyogurt.jpg); "></div>
-                            <h4 class="home-product-item__name">BERRY YOUGURT</h4>
-                      </a>
-                    </div>
-                    <div class="col l-2-4 m-4 c-6">
-                        <a class="home-product-item" href="#">
-                            <div class="home-product-item__img" style="background-image: url(./assets/img/espresso.png); "></div>
-                            <h4 class="home-product-item__name">ESPRESSO</h4>
-                        </a>
-                    </div>         
-                    <div class="col l-2-4 m-4 c-6">
-                        <a class="home-product-item" href="#">
-                            <div class="home-product-item__img" style="background-image: url(./assets/img/kiwipassion.jpg); "></div>
-                            <h4 class="home-product-item__name">KIWI PASSION</h4>
-                        </a>
-                    </div>   
-                    <div class="col l-2-4 m-4 c-6">
-                        <a class="home-product-item" href="#">
-                            <div class="home-product-item__img" style="background-image: url(./assets/img/limejuice.jpg) "></div>
-                            <h4 class="home-product-item__name">LIME JUICE</h4>
-                        </a>
-                    </div>   
-                    <div class="col l-2-4 m-4 c-6">
-                        <a class="home-product-item" href="#">
-                            <div class="home-product-item__img" style="background-image: url(./assets/img/matchalatte.jpg) "></div>
-                            <h4 class="home-product-item__name">mATCHA LATTE</h4>
-                        </a>
-                    </div>   
-                    <div class="col l-2-4 m-4 c-6">
-                        <a class="home-product-item" href="#">
-                            <div class="home-product-item__img" style="background-image: url(./assets/img/mintchocolate.jpg); "></div>
-                            <h4 class="home-product-item__name">MINT CHOCOLATE</h4>
-                        </a>
-                    </div>                                 
-                </div>
+            
+            <% for(int i = 0; i < Math.ceil((double)list_Drink.size()/4); i++){ %>
+                	<div class="row sm-gutter">
+                <% for(int j = i*4; j < (i+1)*4; j++) {
+                	if(j >= list_Drink.size()) break;
+                %>
+                	<div class="col l-2-4 m-4 c-6">
+                            <a class="home-product-item" href="#">
+                                <div class="home-product-item__img" style="background-image: url(./assets/img/<%= list_Drink.get(j).getIMG() %>); "></div>
+                                <h4 class="home-product-item__name"><%= list_Drink.get(j).getName_Drink() %></h4>
+                            </a>
+                        </div>
+                <%} %>
+					</div>
+                <% } %>
             </div>
 
         

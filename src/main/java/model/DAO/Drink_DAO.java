@@ -10,7 +10,7 @@ import java.util.List;
 import model.BEAN.*;
 public class Drink_DAO {
 	static String NAME_DB = "com.mysql.jdbc.Driver";
-	static String URL = "jdbc:mysql://localhost/ltm";
+	static String URL = "jdbc:mysql://localhost/ltmang";
 	public ResultSet excute_querry(String sql)
 	{
 		ResultSet rs = null;
@@ -133,6 +133,29 @@ public class Drink_DAO {
 		}
 		return res;
 	}
+	public List<Drink> getDrinkByType(String typeSearch) {
+		List<Drink> res = new ArrayList<Drink>();
+		//CoSoDuLieu
+		try {
+			String sql = "SELECT * FROM drink WHERE Type = '" +typeSearch+"'";
+			ResultSet temp = excute_querry(sql);
+			while(temp.next())
+			{
+				String id_drink = temp.getString(1);
+				String name_drink = temp.getString(2);
+				String type = temp.getString(3);
+				String ingredient = temp.getString(4);
+				Double price = temp.getDouble(5);
+				String img = temp.getString(6);
+				Drink d = new Drink(id_drink, name_drink, type, ingredient, img, price);
+				res.add(d);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return res;
+	}
+
 	public void delDrink(String MaDoUong) 
 	{
 		String sql = "delete from drink where ID_Drink = '" + MaDoUong + "'";

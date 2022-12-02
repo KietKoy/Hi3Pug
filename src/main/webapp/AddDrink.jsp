@@ -18,6 +18,7 @@
     	<% User user = (User)session.getAttribute("user");
     		String role = (String)session.getAttribute("role");
     		List<String> listTypeDrink = (List<String>) session.getAttribute("listTypeDrink"); 
+    		int isAdmin = (int)request.getAttribute("isAdmin");
     	%>
         <div id="main">
             <div id="header">
@@ -27,18 +28,15 @@
                     </div>
                     <span class="text-heading text-name">HI3PUG COFFEE SHOP</span>
                     <li class="header-item header-user">
-                        <img src="./assets/img/user.png" alt="" class="header-user-img">
+                        <img src="./assets/img/<%= user.getIMG()%> "alt="" class="header-user-img">
                         <div class="header-user-name">
                             <span><%= user.getName() %></span>
                             <span><%= role %></span>
                         </div>
                     
                         <ul class="header-user-menu">
-                            <li class="header-user-item">
-                                <a href="">ACCOUNT</a>
-                            </li>
                             <li class="header-user-item header-user-item--separate">
-                                <a href="">SIGN IN</a>
+                                <a href="UserControllerServlet?logout=1">SIGN OUT</a>
                             </li>
                         </ul>
                     </li>
@@ -85,7 +83,9 @@
                                 <td><label for="">VND</label></td>
                             </tr>
                             <tr>
-                                <td></td>
+                                <td>
+                                	<input type="text" value="<%= isAdmin %>" name="isAdmin" style="width: 0; height: 0; visibility: hidden;">
+                                </td>
                                 <td>
                                     <input type="submit" value="ADD" class="btn content-btn  m-20" name="add">
                                 </td>
