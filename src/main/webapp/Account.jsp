@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <div class="content p-t-80">
+        <div class="content p-t-20">
             <form action="UserControllerServlet"  class="info" method="post">
                 <div class="upload">
                     <div class="upload-file">

@@ -52,5 +52,5 @@ public class Drink_BO {
 			drink_DAO.delDrink(MaDoUong);
 		}
 	}
-	
+
 }

@@ -57,7 +57,7 @@
 
             <div class="content-form">
                 
-                <div class="content-search m-t-60">
+                <div class="content-search">
                     <a href="UserControllerServlet?add=1&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn">ADD</a>
                     <form action="UserControllerServlet" method="post">
                         <div class="drink content-menu">
@@ -76,24 +76,31 @@
 
 
                 <div class="container">
-                    <% for(int i = 0; i < Math.ceil((double)listUser.size()/4); i++){ %>
+                <% for(int i = 0; i < Math.ceil((double)listUser.size()/4); i++){ %>
                 	<div class="row m-t-60">
                 <% for(int j = i*4; j < (i+1)*4; j++) {
-                	if(j >= listUser.size()) break;
+                	if(j >= listUser.size()){
                 %>
+                
+                <div class="col">
+                        </div>
+                        
+                 <%} else { %>
                 	<div class="col">
                             <a class="home-product-item" href="#">
-                                <div class="home-product-item__img" style="background-image: url(./assets/img/<%= listUser.get(j).getIMG() %>); "></div>
-                                <h4 class="home-product-item__name"><%= listUser.get(j).getName()%></h4>
+                                <div class="home-product-item__img" style="background-image: url(./assets/img/<%= listUser.get(j).getIMG() %>); " ></div>
+                                <h4 class="home-product-item__name"><%= listUser.get(j).getName() %></h4>
                                 <div class="home-product-item-btn">
                                     <a href="UserControllerServlet?update=<%= listUser.get(j).getID_User()%>&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn btn-small">UPDATE</a>
-                                    <a href="" class="btn content-btn btn-small">DELETE</a>
+                                    <a href="UserControllerServlet?delete=<%= listUser.get(j).getID_User()%>&isAdmin=0&iduser=<%=listUser.get(j).getID_User()%>&Role=<%=role%>" class="btn content-btn btn-small" onclick="return confirm('Are you sure you want to delete this item?');">DELETE</a>
                                 </div>
                             </a>
                         </div>
                 <%} %>
-					</div>
-                <% } %>  
+
+                <% } %>
+                	</div>
+                 <% } %>       
                 </div>
             </div>
         </div>

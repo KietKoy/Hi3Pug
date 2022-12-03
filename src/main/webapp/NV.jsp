@@ -71,7 +71,7 @@
                 </form>
             </div>
 
-            <div class="home-product">
+            <div class="home-product m-t-20">
             
             <% for(int i = 0; i < Math.ceil((double)list_Drink.size()/4); i++){ %>
                 	<div class="row sm-gutter">
@@ -84,7 +84,7 @@
                                 <h4 class="home-product-item__name"><%= list_Drink.get(j).getName_Drink() %></h4>
                                 <div class="home-product-item-btn">
                                     <a href="DrinkControllerServlet?update2=<%= list_Drink.get(j).getID_Drink()%>" class="btn content-btn">UPDATE</a>
-                                    <a href="" class="btn content-btn">DELETE</a>
+                                    <a href="DrinkControllerServlet?delete=<%= list_Drink.get(j).getID_Drink()%>&isAdmin=0&iduser=<%=user.getID_User()%>" class="btn content-btn" onclick="return confirm('Are you sure you want to delete this item?');">DELETE</a>
                                 </div>
                             </a>
                         </div>

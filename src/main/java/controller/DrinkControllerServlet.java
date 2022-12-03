@@ -73,6 +73,7 @@ public class DrinkControllerServlet extends HttpServlet{
 			String img = request.getParameter("img");
 			String checkAdmin = request.getParameter("isAdmin");
 			int isAdmin = Integer.parseInt(checkAdmin);
+			System.out.println(isAdmin);
 			if(drink_BO.addDrink(id, name, type, ingredient,Double.parseDouble(price), img)) {
 				List<Drink> listDrink = new ArrayList<Drink>();
 				List<String> listTypeDrink = new ArrayList<String>();
@@ -88,6 +89,10 @@ public class DrinkControllerServlet extends HttpServlet{
 					RequestDispatcher rd = getServletContext().getRequestDispatcher("/NV.jsp");
 					rd.forward(request, response);
 				}
+			} else {
+				request.setAttribute("isAdmin", isAdmin);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddDrink.jsp");
+				rd.forward(request, response);
 			}
 		}
 		if(request.getParameter("delete")!=null) {
@@ -101,8 +106,16 @@ public class DrinkControllerServlet extends HttpServlet{
 			session.setAttribute("user", user);
 			session.setAttribute("role", role);
 			session.setAttribute("list_drink", list_drink);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminMenu.jsp");
-			rd.forward(request, response);
+			String checkAdmin = request.getParameter("isAdmin");
+			int isAdmin = Integer.parseInt(checkAdmin);
+			if(isAdmin == 1 ) {
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminMenu.jsp");
+				rd.forward(request, response);
+			}
+			else {
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/NV.jsp");
+				rd.forward(request, response);
+			}
 		}
 	}
 

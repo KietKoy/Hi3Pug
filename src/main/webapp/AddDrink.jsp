@@ -19,7 +19,9 @@
     		String role = (String)session.getAttribute("role");
     		List<String> listTypeDrink = (List<String>) session.getAttribute("listTypeDrink"); 
     		int isAdmin = (int)request.getAttribute("isAdmin");
+
     	%>
+    	
         <div id="main">
             <div id="header">
                 <div class="header-container">

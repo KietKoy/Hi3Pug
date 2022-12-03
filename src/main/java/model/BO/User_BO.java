@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.List;
 
 import model.BEAN.User;
+import model.DAO.Drink_DAO;
 import model.DAO.User_DAO;
 
 public class User_BO {
@@ -36,5 +37,11 @@ public class User_BO {
 			return true;
 		}
 		return false;
+	}
+	public void delUser(String MaUser) {
+		User_DAO user_DAO = new User_DAO();
+		if(isValid(MaUser)) {
+			user_DAO.delUser(MaUser);
+		}
 	}
 }

@@ -181,10 +181,11 @@
 
 .home-product {
   margin-bottom: 10px;
-  position: absolute;
-  top: 180px;
-  width: 100%;
-  margin-left: 50px;
+   position: absolute;
+   top: 180px;
+   width: 100%;
+   padding-left: 50px;
+   background-color: #FFEFCD;
 }
 
 .home-product-item {
@@ -262,7 +263,7 @@
 }
 
 #location {
-    padding-top: 10%;
+    padding-top: 30%;
     background-color: #ffefcd;
 }
 
@@ -433,13 +434,6 @@
   opacity: 0.9;
 }
 
-.modal-login-forget {
-  color: #592F1D;
-  font-size: 18px;
-  text-decoration: underline;
-}
-
-
 
 
 /* Nh�n vi�n */
@@ -579,7 +573,7 @@
 }
 
 .content-search {
-  padding: 0 86px;
+ padding : 50px 86px 50px 86px;
 }
 
 

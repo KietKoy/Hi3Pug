@@ -66,7 +66,7 @@ public class CheckLoginServlet extends HttpServlet{
 			}
 		}
 		else {
-			destination = "/NoLogin.jsp";
+			destination = "MainServlet";
 			RequestDispatcher rd = req.getRequestDispatcher(destination);
 			rd.forward(req, resp);
 		}

@@ -58,7 +58,7 @@
             </div>
             <div class="content-form">
                 
-                <div class="content-search m-t-60">
+                <div class="content-search">
                     <a href="DrinkControllerServlet?mod1=1&isAdmin=1" class="btn content-btn">ADD</a>
                     <form action="DrinkControllerServlet" method="post">
                         <div class="drink content-menu">
@@ -95,7 +95,7 @@
                                 <h4 class="home-product-item__name"><%= list_Drink.get(j).getName_Drink() %></h4>
                                 <div class="home-product-item-btn">
                                     <a href="DrinkControllerServlet?update=<%= list_Drink.get(j).getID_Drink()%>&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn btn-small">UPDATE</a>
-                                    <a href="DrinkControllerServlet?delete=<%= list_Drink.get(j).getID_Drink()%>&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn btn-small">DELETE</a>
+                                    <a href="DrinkControllerServlet?delete=<%= list_Drink.get(j).getID_Drink()%>&isAdmin=1&iduser=<%=user.getID_User()%>&Role=<%=role%>" class="btn content-btn btn-small" onclick="return confirm('Are you sure you want to delete this item?');">DELETE</a>
                                 </div>
                             </a>
                         </div>

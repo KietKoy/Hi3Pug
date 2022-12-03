@@ -76,6 +76,18 @@ public class UserControllerServlet extends HttpServlet{
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/NoLogin.jsp");
 			rd.forward(request, response);
 		}
+		
+		if(request.getParameter("delete")!=null) {
+			String iduser = request.getParameter("iduser");
+			String role = request.getParameter("Role");
+			user_BO.delUser(iduser);
+			List<User> listuser = user_BO.getAllUser();
+			session = request.getSession();
+			session.setAttribute("listuser", listuser);
+			String checkAdmin = request.getParameter("isAdmin");
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminNV.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**
@@ -134,6 +146,8 @@ public class UserControllerServlet extends HttpServlet{
 			if(user_BO.checkUpdate(id, name, sqlDate, email, phone, img)) {
 				List<User> listUser = new ArrayList<User>();
 				listUser = user_BO.getAllUser();
+				User user = user_BO.getUser(id);
+				session.setAttribute("user", user);
 				session.setAttribute("listuser", listUser);
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/AdminNV.jsp");
 				rd.forward(request, response);

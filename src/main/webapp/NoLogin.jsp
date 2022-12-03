@@ -66,7 +66,7 @@
                 <input type="submit" class="btn content-btn" name="search_no_login" value="SHOW">
             </div>
             </form>
-            <div class="home-product">
+            <div class="home-product m-t-20">
             
             <% for(int i = 0; i < Math.ceil((double)list_Drink.size()/4); i++){ %>
                 	<div class="row sm-gutter">
@@ -185,7 +185,6 @@
                     <label class="modal-login-label" for="">Password</label><br>
                     <input class="modal-login-input" type="password" name="password" id="" placeholder="Enter your password"><br><br>
                     <input type="submit" value="LOGIN" class="modal-login-button"><br><br>
-                    <a class="modal-login-forget" href="">Forget password?</a>
                 </form>
 
             </div>

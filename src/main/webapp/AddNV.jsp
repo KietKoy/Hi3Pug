@@ -18,6 +18,7 @@
 			User user = (User)session.getAttribute("user");
     		String role = (String)session.getAttribute("role");
     	%>
+    	
     <div id="main">
         <div id="header">
             <div class="header-container">
